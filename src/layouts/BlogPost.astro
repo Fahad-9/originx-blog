@@ -1,0 +1,172 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+import { SITE_URL, CTA } from '../consts';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  heroAlt,
+  author,
+  categories,
+  faq,
+  answerCapsule,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const imageUrl = heroImage ? new URL(heroImage.src, Astro.site).toString() : undefined;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={`${title} | OriginX AI`} description={description} image={heroImage} />
+    <SchemaOrg
+      type="article"
+      title={title}
+      description={description}
+      url={canonicalUrl}
+      publishedAt={pubDate}
+      updatedAt={updatedDate}
+      image={imageUrl}
+      categories={categories as string[]}
+      faq={faq}
+    />
+    <style>
+      main {
+        width: calc(100% - 2em);
+        max-width: 100%;
+        margin: 0;
+      }
+      .hero-image {
+        width: 100%;
+      }
+      .hero-image img {
+        display: block;
+        margin: 0 auto;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow);
+      }
+      .prose {
+        width: 720px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+        padding: 1em;
+        color: rgb(var(--gray-dark));
+      }
+      .title {
+        margin-bottom: 1em;
+        padding: 1em 0;
+        text-align: center;
+        line-height: 1;
+      }
+      .title h1 {
+        margin: 0 0 0.5em 0;
+      }
+      .date {
+        margin-bottom: 0.5em;
+        color: rgb(var(--gray));
+      }
+      .last-updated-on {
+        font-style: italic;
+      }
+      .categories {
+        display: flex;
+        gap: 0.5em;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 1em;
+      }
+      .category-tag {
+        font-size: 0.8em;
+        padding: 0.25em 0.75em;
+        border-radius: 9999px;
+        background: rgb(var(--accent));
+        color: rgb(var(--accent-dark));
+        text-decoration: none;
+      }
+      .answer-capsule {
+        background: rgb(var(--accent-light));
+        border-left: 4px solid rgb(var(--accent));
+        padding: 1em 1.5em;
+        margin: 1.5em 0;
+        border-radius: 0 8px 8px 0;
+        font-weight: 500;
+      }
+      .cta-box {
+        background: rgb(var(--accent));
+        color: white;
+        padding: 2em;
+        border-radius: 12px;
+        text-align: center;
+        margin: 2em 0;
+      }
+      .cta-box a {
+        display: inline-block;
+        background: white;
+        color: rgb(var(--accent-dark));
+        padding: 0.75em 2em;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <article>
+        <div class="hero-image">
+          {heroImage && <Image width={1020} height={510} src={heroImage} alt={heroAlt || title} />}
+        </div>
+        <div class="prose">
+          <div class="title">
+            {
+              categories && (
+                <div class="categories">
+                  {categories.map((cat: string) => (
+                    <span class="category-tag">{cat}</span>
+                  ))}
+                </div>
+              )
+            }
+            <h1>{title}</h1>
+            <div class="date">
+              <FormattedDate date={pubDate} />
+              {author && <span> &middot; {author}</span>}
+              {
+                updatedDate && (
+                  <div class="last-updated-on">
+                    Last updated on <FormattedDate date={updatedDate} />
+                  </div>
+                )
+              }
+            </div>
+            <hr />
+          </div>
+
+          {answerCapsule && <div class="answer-capsule">{answerCapsule}</div>}
+
+          <slot />
+
+          <div class="cta-box">
+            <p><strong>Ready to automate your business with AI?</strong></p>
+            <a href={CTA.url}>{CTA.text}</a>
+          </div>
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

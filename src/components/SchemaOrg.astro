@@ -1,0 +1,136 @@
+---
+import { SITE_TITLE, SITE_URL, AUTHOR, AUTHOR_URL } from '../consts';
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  type: 'article' | 'website';
+  title: string;
+  description: string;
+  url: string;
+  publishedAt?: Date;
+  updatedAt?: Date;
+  image?: string;
+  categories?: string[];
+  faq?: FAQ[];
+}
+
+const { type, title, description, url, publishedAt, updatedAt, image, categories, faq } =
+  Astro.props;
+
+const schemas: object[] = [];
+
+// Organization schema (always present)
+schemas.push({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'OriginX AI',
+  url: 'https://originxai.com',
+  logo: `${SITE_URL}/favicon.svg`,
+  sameAs: [
+    'https://www.instagram.com/fahadibnakilur/',
+    'https://www.linkedin.com/in/fahadrahman9/',
+    'https://x.com/aiorigine',
+    'https://www.youtube.com/@Fahad-j2j',
+  ],
+  knowsAbout: ['AI Voice Agents', 'AI Automation', 'Enterprise AI', 'GoHighLevel', 'Retell AI'],
+});
+
+// Article schema
+if (type === 'article' && publishedAt) {
+  const articleSchema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: description,
+    url: url,
+    datePublished: publishedAt.toISOString(),
+    author: {
+      '@type': 'Person',
+      name: AUTHOR,
+      url: AUTHOR_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'OriginX AI',
+      url: 'https://originxai.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/favicon.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+  };
+
+  if (updatedAt) articleSchema.dateModified = updatedAt.toISOString();
+  if (image) articleSchema.image = image;
+  if (categories?.length) articleSchema.articleSection = categories[0];
+
+  schemas.push(articleSchema);
+}
+
+// WebSite schema (homepage)
+if (type === 'website') {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_TITLE,
+    url: SITE_URL,
+    description: description,
+    publisher: {
+      '@type': 'Organization',
+      name: 'OriginX AI',
+    },
+  });
+}
+
+// FAQPage schema
+if (faq?.length) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  });
+}
+
+// BreadcrumbList
+const breadcrumbs = [{ name: 'Home', url: SITE_URL }];
+if (type === 'article') {
+  breadcrumbs.push({ name: 'Blog', url: `${SITE_URL}/blog/` });
+  if (categories?.length) {
+    breadcrumbs.push({
+      name: categories[0],
+      url: `${SITE_URL}/category/${categories[0].toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}/`,
+    });
+  }
+  breadcrumbs.push({ name: title, url: url });
+}
+
+schemas.push({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((crumb, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: crumb.name,
+    item: crumb.url,
+  })),
+});
+---
+
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}
