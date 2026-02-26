@@ -2,7 +2,7 @@
 title: "AI Voice Agents vs Call Centers: The Real Cost Breakdown ($0.04 vs $2.38/min)"
 description: "Detailed cost comparison of AI voice agents vs human call centers. Real pricing from Retell AI, Vapi, Bland AI, and self-built solutions with ROI timelines."
 pubDate: 2025-02-24
-author: "Fahad Khan"
+author: "Fahad Rahman"
 categories:
   - "AI Voice Agents"
   - "AI Strategy"

@@ -19,7 +19,7 @@
  *   --draft         Mark as draft (optional, default false)
  *   --date          Publish date YYYY-MM-DD (optional, defaults to today)
  *   --slug          Custom slug (optional, auto-generated from title)
- *   --author        Author name (optional, defaults to "Fahad Khan")
+ *   --author        Author name (optional, defaults to "Fahad Rahman")
  *   --no-push       Skip git push (optional)
  */
 
@@ -96,7 +96,7 @@ function buildFrontmatter(args) {
     `title: "${args.title.replace(/"/g, '\\"')}"`,
     `description: "${args.description.replace(/"/g, '\\"')}"`,
     `pubDate: ${date}`,
-    `author: "${args.author || 'Fahad Khan'}"`,
+    `author: "${args.author || 'Fahad Rahman'}"`,
     'categories:',
     ...categories.map((c) => `  - "${c}"`),
   ];

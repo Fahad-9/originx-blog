@@ -2,7 +2,7 @@
 title: "The Enterprise Guide to AI Automation in 2026: Cut Costs 40-60% While Scaling Operations"
 description: "Complete guide to enterprise AI automation — voice agents, lead automation, CRM integration. Real ROI data, implementation framework, and industry playbooks."
 pubDate: 2025-02-23
-author: "Fahad Khan"
+author: "Fahad Rahman"
 categories:
   - "AI Automation"
   - "AI Strategy"

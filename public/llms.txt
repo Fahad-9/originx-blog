@@ -4,7 +4,7 @@
 OriginX AI helps enterprises deploy AI voice agents and automation systems. This blog covers AI voice agents, automation strategies, cost comparisons, and implementation guides for business decision-makers.
 
 ## Author
-Fahad Khan — Founder, OriginX AI
+Fahad Rahman — Founder, OriginX AI
 LinkedIn: https://www.linkedin.com/in/fahadrahman9/
 
 ## Topics

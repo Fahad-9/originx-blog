@@ -12,7 +12,7 @@ const blog = defineCollection({
       updatedDate: z.coerce.date().optional(),
       heroImage: image().optional(),
       heroAlt: z.string().default(''),
-      author: z.string().default('Fahad Khan'),
+      author: z.string().default('Fahad Rahman'),
       categories: z.array(z.enum(CATEGORIES)).min(1),
       tags: z.array(z.string()).optional(),
       draft: z.boolean().default(false),
