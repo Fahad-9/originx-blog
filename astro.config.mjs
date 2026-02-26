@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://blog.originxai.com',
+  site: 'https://originxai.com',
   output: 'static',
   integrations: [mdx(), sitemap()],
   vite: {

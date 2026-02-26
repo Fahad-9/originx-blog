@@ -1,188 +1,612 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../consts';
+import { SITE_URL, CTA } from '../consts';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
-const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const recentPosts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const partners = ['Retell AI', 'GoHighLevel', 'n8n', 'Vapi', 'Make'];
+
+const faqs = [
+  {
+    q: 'What types of AI Voice Agents can you develop?',
+    a: 'OriginX AI custom-develops a variety of AI voice agents: hospital appointment reminders, lead qualifiers, customer support agents, cold calling facilitators, and more. These are highly effective, personalized solutions — nearly any request can be achieved.',
+  },
+  {
+    q: 'What are Operational AI Voice-Driven Agents?',
+    a: 'Next-generation AI solutions that integrate with all of your software platforms to solve real business challenges. Our AI uses humanlike voices and tonality to accomplish key business tasks with precision.',
+  },
+  {
+    q: 'Is the demo really free?',
+    a: 'Yes — no hidden fees or obligations. Our goal is to let you experience the value before making any commitment.',
+  },
+  {
+    q: 'Will the AI agent call my real customers?',
+    a: 'During the demo, we use test scenarios so your real customers are never contacted without your approval. You control when to go live.',
+  },
+  {
+    q: 'Can AI voice agents handle complex or sensitive calls?',
+    a: 'Yes. Our agents are trained to handle nuanced conversations, follow compliance guidelines, and escalate to human agents when needed.',
+  },
+  {
+    q: 'Will this AI replace my staff or just help them?',
+    a: 'AI augments your team — it handles repetitive calls so your staff can focus on high-value work. Most clients see their team become more productive, not smaller.',
+  },
+  {
+    q: 'Is my data safe?',
+    a: 'Absolutely. We follow industry-standard security practices including encryption at rest and in transit. We can discuss specific compliance requirements for your industry.',
+  },
+  {
+    q: 'How do I get started with OriginX AI?',
+    a: 'Book a free discovery call. We\'ll assess your needs, show you a live demo, and provide a custom implementation plan — no obligation.',
+  },
+];
+
+const services = [
+  {
+    title: 'Inbound AI Receptionist',
+    desc: 'Never miss a call again. AI answers instantly 24/7, qualifies leads, books appointments, and sends you real-time summaries.',
+    icon: 'phone-incoming',
+  },
+  {
+    title: 'Outbound AI Sales',
+    desc: 'AI makes thousands of calls for lead reactivation, appointment reminders, and follow-ups — at a fraction of the cost of human agents.',
+    icon: 'phone-outgoing',
+  },
+  {
+    title: 'AI CRM Management',
+    desc: 'Seamlessly connect with GoHighLevel, HubSpot, and your existing tools. Automate tasks, sync data, and centralize communication.',
+    icon: 'database',
+  },
+  {
+    title: '24/7 AI Sales & Support',
+    desc: 'Your AI picks up calls instantly — day or night — so every lead is captured and every customer feels valued.',
+    icon: 'clock',
+  },
+];
+
+const process_steps = [
+  { num: '01', title: 'Discovery Call', desc: 'We learn your business, call flows, and goals.' },
+  { num: '02', title: 'Custom AI Build', desc: 'We design and train voice agents tailored to your exact needs.' },
+  { num: '03', title: 'Integration', desc: 'Connect to your CRM, calendar, phone system — seamlessly.' },
+  { num: '04', title: 'Launch & Optimize', desc: 'Go live, monitor performance, and continuously improve.' },
+];
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title="OriginX AI — AI Voice Agents & Automation for Business"
+      description="Stop missing revenue from unanswered calls. OriginX AI deploys AI voice agents that answer, qualify, and book appointments 24/7."
+    />
     <SchemaOrg
       type="website"
-      title={SITE_TITLE}
-      description={SITE_DESCRIPTION}
+      title="OriginX AI — AI Voice Agents & Automation for Business"
+      description="AI voice agents and automation for enterprises that want real results."
       url={SITE_URL}
     />
   </head>
   <body>
     <Header />
     <main>
+      <!-- Hero -->
       <section class="hero">
-        <h1>OriginX AI Blog</h1>
-        <p>In-depth guides on AI voice agents, automation, and enterprise AI strategy — with real data, not marketing fluff.</p>
+        <div class="hero-inner">
+          <div class="hero-badge">AI Voice Agents for Business</div>
+          <h1>Replace Missed Calls With <span class="hero-accent">AI Voice Agents</span></h1>
+          <p class="hero-sub">Stop missing revenue from unanswered calls. Our AI Voice Receptionist instantly answers, qualifies, and books appointments — 24/7.</p>
+          <div class="hero-actions">
+            <a href={CTA.url} class="btn-primary">{CTA.text}</a>
+            <a href="/blog" class="btn-secondary">Read the Blog</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-num">24/7</span>
+              <span class="stat-label">Availability</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">$0.04</span>
+              <span class="stat-label">/min AI cost</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num">40%</span>
+              <span class="stat-label">More conversions</span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {sorted.length > 0 ? (
-        <ul class="posts-grid">
-          {sorted.map((post) => (
-            <li class="post-card">
-              <a href={`/${post.id}/`}>
-                {post.data.heroImage && (
-                  <img
-                    src={post.data.heroImage.src}
-                    alt={post.data.heroAlt || post.data.title}
-                    width="720"
-                    height="360"
-                    loading="lazy"
-                  />
-                )}
-                <div class="card-body">
-                  {post.data.categories && (
-                    <div class="card-categories">
-                      {post.data.categories.map((cat: string) => (
-                        <span class="category-tag">{cat}</span>
-                      ))}
-                    </div>
-                  )}
-                  <h2>{post.data.title}</h2>
-                  <p class="card-description">{post.data.description}</p>
-                  <div class="card-meta">
-                    <FormattedDate date={post.data.pubDate} />
-                    {post.data.author && <span>&middot; {post.data.author}</span>}
-                  </div>
-                </div>
-              </a>
-            </li>
+      <!-- Partners -->
+      <section class="partners">
+        <p class="partners-label">Trusted Technology Partners</p>
+        <div class="partners-logos">
+          {partners.map((name) => (
+            <span class="partner-name">{name}</span>
           ))}
-        </ul>
-      ) : (
-        <div class="empty-state">
-          <p>Posts coming soon.</p>
         </div>
+      </section>
+
+      <!-- Services -->
+      <section class="services" id="services">
+        <div class="section-header">
+          <h2>AI Services That Deliver Results</h2>
+          <p>Enterprise-grade AI voice agents and automation — built for your specific business needs.</p>
+        </div>
+        <div class="services-grid">
+          {services.map((svc) => (
+            <div class="service-card">
+              <div class="service-icon">
+                {svc.icon === 'phone-incoming' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 2 16 8 22 8"/><line x1="23" y1="1" x2="16" y2="8"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                )}
+                {svc.icon === 'phone-outgoing' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 7 23 1 17 1"/><line x1="16" y1="8" x2="23" y2="1"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                )}
+                {svc.icon === 'database' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                )}
+                {svc.icon === 'clock' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                )}
+              </div>
+              <h3>{svc.title}</h3>
+              <p>{svc.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section class="process">
+        <div class="section-header">
+          <h2>Our Process</h2>
+          <p>From discovery to deployment in weeks, not months.</p>
+        </div>
+        <div class="process-grid">
+          {process_steps.map((step) => (
+            <div class="process-step">
+              <span class="step-num">{step.num}</span>
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Recent posts -->
+      {recentPosts.length > 0 && (
+        <section class="recent-posts">
+          <div class="section-header">
+            <h2>Latest from the Blog</h2>
+            <p>In-depth guides with real data, not marketing fluff.</p>
+          </div>
+          <div class="posts-row">
+            {recentPosts.map((post) => (
+              <a href={`/blog/${post.id}/`} class="post-preview">
+                <span class="post-category">{post.data.categories?.[0]}</span>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+              </a>
+            ))}
+          </div>
+          <div class="posts-more">
+            <a href="/blog" class="btn-secondary">View All Posts</a>
+          </div>
+        </section>
       )}
+
+      <!-- FAQ -->
+      <section class="faq" id="faq">
+        <div class="section-header">
+          <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-list">
+          {faqs.map((faq) => (
+            <details class="faq-item">
+              <summary>{faq.q}</summary>
+              <p>{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="final-cta">
+        <h2>Ready to Stop Missing Calls?</h2>
+        <p>Book a free discovery call and see how AI voice agents can transform your business.</p>
+        <a href={CTA.url} class="btn-primary">{CTA.text}</a>
+      </section>
     </main>
     <Footer />
   </body>
 </html>
 
 <style>
+  /* Layout */
   main {
-    max-width: 960px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 0 1.5rem;
   }
 
-  .hero {
+  .section-header {
     text-align: center;
-    padding: 2rem 0 3rem;
+    margin-bottom: 2.5rem;
   }
-  .hero h1 {
-    font-size: 2.4rem;
-    margin: 0 0 0.5rem;
-    color: var(--text-primary);
+  .section-header h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
   }
-  .hero p {
+  .section-header p {
     color: var(--text-secondary);
     font-size: 1.1rem;
-    max-width: 560px;
+    max-width: 520px;
     margin: 0 auto;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 4rem 0 3rem;
+    text-align: center;
+  }
+  .hero-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .hero-accent {
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 2rem;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    background: var(--cta-bg);
+    color: var(--cta-text) !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 150ms ease, transform 150ms ease;
+  }
+  .btn-primary:visited { color: var(--cta-text) !important; }
+  .btn-primary:hover {
+    background: var(--cta-hover);
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-primary) !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: border-color 150ms ease, background-color 150ms ease;
+  }
+  .btn-secondary:visited { color: var(--text-primary) !important; }
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+
+  /* Stats */
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .stat-num {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+  }
+
+  /* Partners */
+  .partners {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  .partners-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin: 0 0 1rem;
+  }
+  .partners-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .partner-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    opacity: 0.7;
+    transition: opacity 150ms ease;
+  }
+  .partner-name:hover {
+    opacity: 1;
+  }
+
+  /* Services */
+  .services {
+    padding: 4rem 0;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+  .service-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .service-card h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.5rem;
+  }
+  .service-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0;
     line-height: 1.5;
   }
 
-  .posts-grid {
+  /* Process */
+  .process {
+    padding: 4rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .process-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    list-style: none;
-    padding: 0;
+  }
+  .process-step {
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .process-step h3 {
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
+  }
+  .process-step p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
     margin: 0;
+    line-height: 1.5;
   }
 
-  .post-card {
-    background: var(--surface);
+  /* Recent posts */
+  .recent-posts {
+    padding: 4rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .posts-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .post-preview {
+    display: block;
+    padding: 1.5rem;
     border: 1px solid var(--border);
     border-radius: 12px;
-    overflow: hidden;
-    transition: transform 200ms ease, box-shadow 200ms ease;
-  }
-  .post-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-  .post-card a {
     text-decoration: none;
     color: inherit;
-    display: block;
+    transition: box-shadow 200ms ease, transform 200ms ease;
   }
-  .post-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  .post-preview:visited { color: inherit; }
+  .post-preview:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
   }
-
-  .card-body {
-    padding: 1.25rem;
-  }
-  .card-categories {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.5rem;
-  }
-  .category-tag {
+  .post-category {
     font-size: 0.7rem;
     font-weight: 600;
-    padding: 0.15rem 0.5rem;
-    border-radius: 9999px;
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
-    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    color: var(--accent);
   }
-
-  .post-card h2 {
-    font-size: 1.15rem;
+  .post-preview h3 {
+    font-size: 1.05rem;
     line-height: 1.3;
-    margin: 0 0 0.5rem;
-    color: var(--text-primary);
+    margin: 0.5rem 0;
   }
-  .card-description {
-    font-size: 0.9rem;
+  .post-preview p {
     color: var(--text-secondary);
-    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    margin: 0;
     line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .card-meta {
-    display: flex;
-    gap: 0.4rem;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-  }
-
-  .empty-state {
+  .posts-more {
     text-align: center;
-    padding: 4rem 0;
-    color: var(--text-secondary);
+    margin-top: 2rem;
   }
 
+  /* FAQ */
+  .faq {
+    padding: 4rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+  .faq-item summary {
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 150ms ease;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+  .faq-item[open] summary::after {
+    content: '\2212';
+  }
+  .faq-item summary:hover {
+    background: var(--code-bg);
+  }
+  .faq-item p {
+    padding: 0 1.25rem 1rem;
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: var(--accent);
+    border-radius: 16px;
+    margin: 2rem 0 3rem;
+  }
+  .final-cta h2 {
+    color: #fff;
+    font-size: 2rem;
+    margin: 0 0 0.75rem;
+  }
+  .final-cta p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin: 0 0 1.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .final-cta .btn-primary {
+    background: #fff;
+    color: var(--accent) !important;
+    font-size: 1.05rem;
+    padding: 0.85rem 2rem;
+  }
+  .final-cta .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 1.75rem;
-    }
-    .posts-grid {
-      grid-template-columns: 1fr;
-    }
+    .hero { padding: 2.5rem 0 2rem; }
+    .hero h1 { font-size: 2rem; }
+    .hero-stats { gap: 1.5rem; }
+    .stat-num { font-size: 1.35rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+    .posts-row { grid-template-columns: 1fr; }
+    .final-cta { padding: 3rem 1.5rem; }
+    .final-cta h2 { font-size: 1.5rem; }
   }
 </style>
