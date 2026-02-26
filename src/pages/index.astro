@@ -4,7 +4,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, CTA } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../consts';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -21,137 +21,168 @@ const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.va
       description={SITE_DESCRIPTION}
       url={SITE_URL}
     />
-    <style>
-      main {
-        width: 960px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 2em 1em;
-      }
-      .hero {
-        text-align: center;
-        padding: 2em 0 3em;
-      }
-      .hero h1 {
-        margin: 0;
-        font-size: 2.5em;
-        line-height: 1.2;
-      }
-      .hero p {
-        color: rgb(var(--gray));
-        font-size: 1.1em;
-        margin-top: 0.5em;
-      }
-      .posts-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 2em;
-        list-style: none;
-        padding: 0;
-      }
-      .post-card {
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: var(--box-shadow);
-        transition: transform 0.2s;
-      }
-      .post-card:hover {
-        transform: translateY(-4px);
-      }
-      .post-card a {
-        text-decoration: none;
-        color: inherit;
-      }
-      .post-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-      }
-      .post-card .content {
-        padding: 1em 1.25em;
-      }
-      .post-card h2 {
-        margin: 0 0 0.5em;
-        font-size: 1.15em;
-        line-height: 1.3;
-      }
-      .post-card .date {
-        font-size: 0.85em;
-        color: rgb(var(--gray));
-      }
-      .post-card .description {
-        font-size: 0.9em;
-        color: rgb(var(--gray));
-        margin-top: 0.5em;
-      }
-      .post-card .categories {
-        display: flex;
-        gap: 0.4em;
-        flex-wrap: wrap;
-        margin-top: 0.75em;
-      }
-      .post-card .category-tag {
-        font-size: 0.7em;
-        padding: 0.2em 0.6em;
-        border-radius: 9999px;
-        background: rgb(var(--accent));
-        color: rgb(var(--accent-dark));
-      }
-      .empty-state {
-        text-align: center;
-        padding: 4em 0;
-        color: rgb(var(--gray));
-      }
-    </style>
   </head>
   <body>
     <Header />
     <main>
       <section class="hero">
-        <h1>{SITE_TITLE}</h1>
-        <p>{SITE_DESCRIPTION}</p>
+        <h1>OriginX AI Blog</h1>
+        <p>In-depth guides on AI voice agents, automation, and enterprise AI strategy — with real data, not marketing fluff.</p>
       </section>
 
-      {
-        sorted.length > 0 ? (
-          <ul class="posts-grid">
-            {sorted.map((post) => (
-              <li class="post-card">
-                <a href={`/${post.id}/`}>
-                  {post.data.heroImage && (
-                    <img
-                      src={post.data.heroImage.src}
-                      alt={post.data.heroAlt || post.data.title}
-                      width="720"
-                      height="360"
-                      loading="lazy"
-                    />
-                  )}
-                  <div class="content">
-                    <div class="date">
-                      <FormattedDate date={post.data.pubDate} />
+      {sorted.length > 0 ? (
+        <ul class="posts-grid">
+          {sorted.map((post) => (
+            <li class="post-card">
+              <a href={`/${post.id}/`}>
+                {post.data.heroImage && (
+                  <img
+                    src={post.data.heroImage.src}
+                    alt={post.data.heroAlt || post.data.title}
+                    width="720"
+                    height="360"
+                    loading="lazy"
+                  />
+                )}
+                <div class="card-body">
+                  {post.data.categories && (
+                    <div class="card-categories">
+                      {post.data.categories.map((cat: string) => (
+                        <span class="category-tag">{cat}</span>
+                      ))}
                     </div>
-                    <h2>{post.data.title}</h2>
-                    <p class="description">{post.data.description}</p>
-                    {post.data.categories && (
-                      <div class="categories">
-                        {post.data.categories.map((cat: string) => (
-                          <span class="category-tag">{cat}</span>
-                        ))}
-                      </div>
-                    )}
+                  )}
+                  <h2>{post.data.title}</h2>
+                  <p class="card-description">{post.data.description}</p>
+                  <div class="card-meta">
+                    <FormattedDate date={post.data.pubDate} />
+                    {post.data.author && <span>&middot; {post.data.author}</span>}
                   </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div class="empty-state">
-            <p>Posts coming soon.</p>
-          </div>
-        )
-      }
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="empty-state">
+          <p>Posts coming soon.</p>
+        </div>
+      )}
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 2rem 0 3rem;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem;
+    color: var(--text-primary);
+  }
+  .hero p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+  .post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .post-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .post-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 1.25rem;
+  }
+  .card-categories {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  .category-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .post-card h2 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+    margin: 0 0 0.5rem;
+    color: var(--text-primary);
+  }
+  .card-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.75rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-meta {
+    display: flex;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 1.75rem;
+    }
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+/**
+ * Banner CTA — full-width end-of-article call to action.
+ * Position: after article content, before footer.
+ */
+import { CTA } from '../consts';
+---
+
+<section class="banner-cta">
+  <div class="banner-cta-inner">
+    <h2 class="banner-cta-heading">Ready to automate your business with AI?</h2>
+    <p class="banner-cta-body">Let's discuss how AI voice agents and automation can cut costs, scale operations, and deliver real ROI for your enterprise.</p>
+    <a href={CTA.url} target="_blank" rel="noopener" class="banner-cta-btn">{CTA.text} &rarr;</a>
+  </div>
+</section>
+
+<style>
+  .banner-cta {
+    background: var(--accent);
+    border-radius: 12px;
+    margin: 3rem 0 0;
+    overflow: hidden;
+  }
+  .banner-cta-inner {
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .banner-cta-heading {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    line-height: 1.3;
+  }
+  .banner-cta-body {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0 0 1.5rem;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  .banner-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--accent) !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+  .banner-cta-btn:visited { color: var(--accent) !important; }
+  .banner-cta-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 768px) {
+    .banner-cta-inner {
+      padding: 2rem 1.5rem;
+    }
+    .banner-cta-heading {
+      font-size: 1.25rem;
+    }
+  }
+</style>

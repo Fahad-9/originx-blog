@@ -6,6 +6,8 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import BannerCTA from '../components/BannerCTA.astro';
 import { SITE_URL, CTA } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
@@ -41,132 +43,282 @@ const imageUrl = heroImage ? new URL(heroImage.src, Astro.site).toString() : und
       categories={categories as string[]}
       faq={faq}
     />
-    <style>
-      main {
-        width: calc(100% - 2em);
-        max-width: 100%;
-        margin: 0;
-      }
-      .hero-image {
-        width: 100%;
-      }
-      .hero-image img {
-        display: block;
-        margin: 0 auto;
-        border-radius: 12px;
-        box-shadow: var(--box-shadow);
-      }
-      .prose {
-        width: 720px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 1em;
-        color: rgb(var(--gray-dark));
-      }
-      .title {
-        margin-bottom: 1em;
-        padding: 1em 0;
-        text-align: center;
-        line-height: 1;
-      }
-      .title h1 {
-        margin: 0 0 0.5em 0;
-      }
-      .date {
-        margin-bottom: 0.5em;
-        color: rgb(var(--gray));
-      }
-      .last-updated-on {
-        font-style: italic;
-      }
-      .categories {
-        display: flex;
-        gap: 0.5em;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 1em;
-      }
-      .category-tag {
-        font-size: 0.8em;
-        padding: 0.25em 0.75em;
-        border-radius: 9999px;
-        background: rgb(var(--accent));
-        color: rgb(var(--accent-dark));
-        text-decoration: none;
-      }
-      .answer-capsule {
-        background: rgb(var(--accent-light));
-        border-left: 4px solid rgb(var(--accent));
-        padding: 1em 1.5em;
-        margin: 1.5em 0;
-        border-radius: 0 8px 8px 0;
-        font-weight: 500;
-      }
-      .cta-box {
-        background: rgb(var(--accent));
-        color: white;
-        padding: 2em;
-        border-radius: 12px;
-        text-align: center;
-        margin: 2em 0;
-      }
-      .cta-box a {
-        display: inline-block;
-        background: white;
-        color: rgb(var(--accent-dark));
-        padding: 0.75em 2em;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 700;
-        margin-top: 1em;
-      }
-    </style>
   </head>
 
   <body>
     <Header />
-    <main>
-      <article>
-        <div class="hero-image">
-          {heroImage && <Image width={1020} height={510} src={heroImage} alt={heroAlt || title} />}
-        </div>
-        <div class="prose">
-          <div class="title">
-            {
-              categories && (
-                <div class="categories">
-                  {categories.map((cat: string) => (
-                    <span class="category-tag">{cat}</span>
-                  ))}
-                </div>
-              )
-            }
-            <h1>{title}</h1>
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {author && <span> &middot; {author}</span>}
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
+    <div id="reading-progress" class="reading-progress" style="width: 0%"></div>
+
+    <main class="article-layout">
+      <article class="article-main">
+        <!-- Hero -->
+        {heroImage && (
+          <div class="hero-image">
+            <Image width={1020} height={510} src={heroImage} alt={heroAlt || title} />
+          </div>
+        )}
+
+        <!-- Article header -->
+        <header class="article-header">
+          {categories && (
+            <div class="categories">
+              {categories.map((cat: string) => (
+                <span class="category-tag">{cat}</span>
+              ))}
             </div>
-            <hr />
+          )}
+          <h1>{title}</h1>
+          <div class="article-meta">
+            <FormattedDate date={pubDate} />
+            {author && <span>&middot; {author}</span>}
+            {updatedDate && (
+              <span class="updated">
+                &middot; Updated <FormattedDate date={updatedDate} />
+              </span>
+            )}
           </div>
+        </header>
 
-          {answerCapsule && <div class="answer-capsule">{answerCapsule}</div>}
-
-          <slot />
-
-          <div class="cta-box">
-            <p><strong>Ready to automate your business with AI?</strong></p>
-            <a href={CTA.url}>{CTA.text}</a>
+        <!-- Answer capsule -->
+        {answerCapsule && (
+          <div class="answer-capsule">
+            <strong>Quick Answer:</strong> {answerCapsule}
           </div>
+        )}
+
+        <!-- Mobile TOC -->
+        <div class="toc-mobile">
+          <TableOfContents />
         </div>
+
+        <!-- Article body -->
+        <div class="article-content">
+          <slot />
+        </div>
+
+        <!-- FAQ section -->
+        {faq && faq.length > 0 && (
+          <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            {faq.map((item: { question: string; answer: string }) => (
+              <details class="faq-item">
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </section>
+        )}
+
+        <!-- End-of-article CTA -->
+        <BannerCTA />
       </article>
+
+      <!-- Desktop TOC sidebar -->
+      <aside class="toc-sidebar">
+        <div class="toc-sticky">
+          <TableOfContents />
+        </div>
+      </aside>
     </main>
+
     <Footer />
+
+    <script>
+      // Reading progress bar
+      function updateProgress() {
+        const article = document.querySelector('.article-content');
+        if (!article) return;
+        const rect = article.getBoundingClientRect();
+        const total = rect.height - window.innerHeight;
+        const progress = Math.min(Math.max((-rect.top) / total * 100, 0), 100);
+        const bar = document.getElementById('reading-progress');
+        if (bar) bar.style.width = `${progress}%`;
+      }
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => { updateProgress(); ticking = false; });
+          ticking = true;
+        }
+      }, { passive: true });
+    </script>
+
+    <style>
+      .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: var(--accent);
+        z-index: 100;
+        transition: width 100ms ease;
+      }
+
+      .article-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 680px) 220px;
+        gap: 3rem;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .article-main {
+        min-width: 0;
+      }
+
+      .hero-image {
+        margin-bottom: 2rem;
+      }
+      .hero-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+      }
+
+      .article-header {
+        margin-bottom: 2rem;
+      }
+      .article-header h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin: 0.5rem 0;
+      }
+
+      .categories {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.25rem;
+      }
+      .category-tag {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.2rem 0.65rem;
+        border-radius: 9999px;
+        background: color-mix(in srgb, var(--accent) 12%, transparent);
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .article-meta {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+      .updated {
+        font-style: italic;
+      }
+
+      .answer-capsule {
+        background: color-mix(in srgb, var(--accent) 8%, transparent);
+        border-left: 4px solid var(--accent);
+        padding: 1rem 1.25rem;
+        margin-bottom: 2rem;
+        border-radius: 0 8px 8px 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--text-primary);
+      }
+      .answer-capsule strong {
+        color: var(--accent);
+      }
+
+      .article-content {
+        line-height: 1.7;
+      }
+      .article-content :global(h2) {
+        scroll-margin-top: 80px;
+      }
+      .article-content :global(h3) {
+        scroll-margin-top: 80px;
+      }
+
+      /* FAQ */
+      .faq-section {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+      }
+      .faq-section h2 {
+        margin-top: 0;
+      }
+      .faq-item {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 0.75rem;
+        overflow: hidden;
+      }
+      .faq-item summary {
+        padding: 1rem 1.25rem;
+        font-weight: 600;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background-color 150ms ease;
+      }
+      .faq-item summary::-webkit-details-marker { display: none; }
+      .faq-item summary::after {
+        content: '+';
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+        flex-shrink: 0;
+        margin-left: 1rem;
+      }
+      .faq-item[open] summary::after {
+        content: '\2212';
+      }
+      .faq-item summary:hover {
+        background: var(--code-bg);
+      }
+      .faq-item p {
+        padding: 0 1.25rem 1rem;
+        margin: 0;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      /* TOC sidebar */
+      .toc-sidebar {
+        display: block;
+      }
+      .toc-sticky {
+        position: sticky;
+        top: 80px;
+      }
+      .toc-mobile {
+        display: none;
+        margin-bottom: 1.5rem;
+      }
+
+      @media (max-width: 1024px) {
+        .article-layout {
+          grid-template-columns: 1fr;
+          max-width: 720px;
+        }
+        .toc-sidebar {
+          display: none;
+        }
+        .toc-mobile {
+          display: block;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .article-header h1 {
+          font-size: 1.75rem;
+        }
+        .article-layout {
+          padding: 1.5rem 1rem;
+        }
+      }
+    </style>
   </body>
 </html>

@@ -1,0 +1,172 @@
+---
+/**
+ * Auto-generates a table of contents from the article headings.
+ * On desktop: sticky sidebar. On mobile: collapsible dropdown.
+ * Uses Intersection Observer for active section highlighting.
+ */
+---
+
+<nav id="toc" class="toc" aria-label="Table of contents">
+  <button id="toc-toggle" class="toc-toggle" aria-expanded="false">
+    <span>On this page</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+  <div class="toc-title">On this page</div>
+  <ol id="toc-list" class="toc-list"></ol>
+</nav>
+
+<style>
+  .toc {
+    font-size: 0.85rem;
+  }
+
+  .toc-title {
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc-toggle {
+    display: none;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc-list :global(li) {
+    margin-bottom: 0.25rem;
+  }
+  .toc-list :global(a) {
+    display: block;
+    padding: 0.3rem 0 0.3rem 0.75rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .toc-list :global(a:visited) {
+    color: var(--text-secondary);
+  }
+  .toc-list :global(a:hover) {
+    color: var(--text-primary);
+  }
+  .toc-list :global(a.active) {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  .toc-list :global(li.depth-3 a) {
+    padding-left: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* Mobile: collapsible dropdown */
+  @media (max-width: 1024px) {
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+    .toc-title {
+      display: none;
+    }
+    .toc-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .toc-toggle svg {
+      transition: transform 200ms ease;
+    }
+    .toc-toggle[aria-expanded="true"] svg {
+      transform: rotate(180deg);
+    }
+    .toc-list {
+      display: none;
+      padding: 0 1rem 0.75rem;
+    }
+    .toc-list.open {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  function initTOC() {
+    const article = document.querySelector('.article-content');
+    if (!article) return;
+
+    const headings = article.querySelectorAll('h2, h3');
+    if (headings.length === 0) return;
+
+    const tocList = document.getElementById('toc-list');
+    if (!tocList) return;
+
+    // Build TOC
+    headings.forEach((heading) => {
+      if (!heading.id) {
+        heading.id = heading.textContent!
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+
+      const li = document.createElement('li');
+      const tag = heading.tagName.toLowerCase();
+      if (tag === 'h3') li.classList.add('depth-3');
+
+      const a = document.createElement('a');
+      a.href = `#${heading.id}`;
+      a.textContent = heading.textContent;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    // Intersection Observer for active heading
+    const links = tocList.querySelectorAll('a');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            links.forEach((link) => link.classList.remove('active'));
+            const activeLink = tocList.querySelector(`a[href="#${entry.target.id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-80px 0px -70% 0px', threshold: 0 }
+    );
+
+    headings.forEach((heading) => observer.observe(heading));
+
+    // Mobile toggle
+    const toggle = document.getElementById('toc-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        tocList.classList.toggle('open');
+      });
+    }
+  }
+
+  initTOC();
+</script>

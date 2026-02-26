@@ -2,42 +2,13 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import BannerCTA from '../components/BannerCTA.astro';
 import { SITE_TITLE, CTA } from '../consts';
 ---
 
 <html lang="en">
   <head>
     <BaseHead title={`About | ${SITE_TITLE}`} description="OriginX AI helps enterprises deploy AI voice agents and automation systems that cut costs and scale operations." />
-    <style>
-      main {
-        width: 720px;
-        max-width: calc(100% - 2em);
-        margin: auto;
-        padding: 2em 1em;
-        color: rgb(var(--gray-dark));
-      }
-      h1 {
-        margin-bottom: 0.5em;
-      }
-      .cta-box {
-        background: rgb(var(--accent));
-        color: white;
-        padding: 2em;
-        border-radius: 12px;
-        text-align: center;
-        margin: 2em 0;
-      }
-      .cta-box a {
-        display: inline-block;
-        background: white;
-        color: rgb(var(--accent-dark));
-        padding: 0.75em 2em;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 700;
-        margin-top: 1em;
-      }
-    </style>
   </head>
   <body>
     <Header />
@@ -60,11 +31,16 @@ import { SITE_TITLE, CTA } from '../consts';
       <p>
         We publish in-depth technical content because enterprise decision-makers deserve real data, not marketing fluff. Every article includes actual cost breakdowns, implementation details, and honest comparisons.
       </p>
-      <div class="cta-box">
-        <p><strong>Ready to see what AI can do for your business?</strong></p>
-        <a href={CTA.url}>{CTA.text}</a>
-      </div>
+      <BannerCTA />
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+</style>

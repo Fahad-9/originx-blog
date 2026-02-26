@@ -1,0 +1,27 @@
+---
+/**
+ * Inline text CTA — appears as a natural sentence within the article body.
+ * Position: after ~200 words (first CTA touchpoint).
+ */
+import { CTA } from '../consts';
+---
+
+<p class="inline-cta">
+  Want to see how AI automation can transform your business? <a href={CTA.url} target="_blank" rel="noopener">{CTA.text} &rarr;</a>
+</p>
+
+<style>
+  .inline-cta {
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+  .inline-cta a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .inline-cta a:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

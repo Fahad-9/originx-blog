@@ -1,0 +1,52 @@
+---
+/**
+ * Card CTA — mid-article callout box.
+ * Position: at ~50% of article content.
+ */
+import { CTA } from '../consts';
+---
+
+<aside class="card-cta">
+  <div class="card-cta-content">
+    <p class="card-cta-heading">Need help implementing AI in your business?</p>
+    <p class="card-cta-body">We help enterprises deploy AI voice agents and automations that deliver real ROI — not just demos.</p>
+    <a href={CTA.url} target="_blank" rel="noopener" class="card-cta-btn">{CTA.text}</a>
+  </div>
+</aside>
+
+<style>
+  .card-cta {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin: 2rem 0;
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+  }
+  .card-cta-heading {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem;
+    color: var(--text-primary);
+  }
+  .card-cta-body {
+    color: var(--text-secondary);
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .card-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    background: var(--cta-bg);
+    color: var(--cta-text) !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 150ms ease;
+  }
+  .card-cta-btn:visited { color: var(--cta-text) !important; }
+  .card-cta-btn:hover { background: var(--cta-hover); }
+</style>
