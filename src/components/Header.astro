@@ -16,8 +16,9 @@ const isActive = (href: string) => {
     </a>
 
     <nav class="nav-desktop">
-      <a href="/" class:list={[{ active: isActive('/') }]}>Home</a>
-      <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blog</a>
+      <a href="/#features" class:list={[{ active: isActive('/') && pathname === '/' }]}>Features</a>
+      <a href="/#faq">FAQs</a>
+      <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blogs</a>
       <a href="/about" class:list={[{ active: isActive('/about') }]}>About</a>
     </nav>
 
@@ -37,8 +38,9 @@ const isActive = (href: string) => {
   </div>
 
   <nav id="mobile-menu" class="nav-mobile" aria-hidden="true">
-    <a href="/" class:list={[{ active: isActive('/') }]}>Home</a>
-    <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blog</a>
+    <a href="/#features">Features</a>
+    <a href="/#faq">FAQs</a>
+    <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blogs</a>
     <a href="/about" class:list={[{ active: isActive('/about') }]}>About</a>
     <a href={CTA.url} class="mobile-cta">{CTA.text}</a>
   </nav>
@@ -151,18 +153,21 @@ const isActive = (href: string) => {
   .header-cta {
     display: inline-flex;
     align-items: center;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    background: var(--cta-bg);
-    color: var(--cta-text) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    background: #111;
+    color: #fff !important;
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 600;
     white-space: nowrap;
-    transition: background-color 150ms ease;
+    transition: transform 150ms ease, box-shadow 150ms ease;
   }
-  .header-cta:visited { color: var(--cta-text) !important; }
-  .header-cta:hover { background: var(--cta-hover); }
+  .header-cta:visited { color: #fff !important; }
+  .header-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
 
   /* Mobile menu button */
   #mobile-menu-btn {

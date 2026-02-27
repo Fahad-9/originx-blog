@@ -11,8 +11,6 @@ const recentPosts = posts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const partners = ['Retell AI', 'GoHighLevel', 'n8n', 'Vapi', 'Make'];
-
 const faqs = [
   {
     q: 'What types of AI Voice Agents can you develop?',
@@ -47,36 +45,6 @@ const faqs = [
     a: 'Book a free discovery call. We\'ll assess your needs, show you a live demo, and provide a custom implementation plan — no obligation.',
   },
 ];
-
-const services = [
-  {
-    title: 'Inbound AI Receptionist',
-    desc: 'Never miss a call again. AI answers instantly 24/7, qualifies leads, books appointments, and sends you real-time summaries.',
-    icon: 'phone-incoming',
-  },
-  {
-    title: 'Outbound AI Sales',
-    desc: 'AI makes thousands of calls for lead reactivation, appointment reminders, and follow-ups — at a fraction of the cost of human agents.',
-    icon: 'phone-outgoing',
-  },
-  {
-    title: 'AI CRM Management',
-    desc: 'Seamlessly connect with GoHighLevel, HubSpot, and your existing tools. Automate tasks, sync data, and centralize communication.',
-    icon: 'database',
-  },
-  {
-    title: '24/7 AI Sales & Support',
-    desc: 'Your AI picks up calls instantly — day or night — so every lead is captured and every customer feels valued.',
-    icon: 'clock',
-  },
-];
-
-const process_steps = [
-  { num: '01', title: 'Discovery Call', desc: 'We learn your business, call flows, and goals.' },
-  { num: '02', title: 'Custom AI Build', desc: 'We design and train voice agents tailored to your exact needs.' },
-  { num: '03', title: 'Integration', desc: 'Connect to your CRM, calendar, phone system — seamlessly.' },
-  { num: '04', title: 'Launch & Optimize', desc: 'Go live, monitor performance, and continuously improve.' },
-];
 ---
 
 <!doctype html>
@@ -96,132 +64,266 @@ const process_steps = [
   <body>
     <Header />
     <main>
-      <!-- Hero -->
+      <!-- ========== HERO ========== -->
       <section class="hero">
         <div class="hero-inner">
-          <div class="hero-badge">AI Voice Agents for Business</div>
-          <h1>Replace Missed Calls With <span class="hero-accent">AI Voice Agents</span></h1>
-          <p class="hero-sub">Stop missing revenue from unanswered calls. Our AI Voice Receptionist instantly answers, qualifies, and books appointments — 24/7.</p>
-          <div class="hero-actions">
-            <a href={CTA.url} class="btn-primary">{CTA.text}</a>
-            <a href="/blog" class="btn-secondary">Read the Blog</a>
+          <h1 class="hero-heading">
+            <span class="hero-line-gray">Replace Missed Calls With</span>
+            <span class="hero-line-black">AI Voice Agents</span>
+          </h1>
+          <p class="hero-sub">
+            Stop missing revenue from unanswered calls. Our AI Voice
+            Receptionist instantly answers, qualifies, and books appointments.
+          </p>
+          <a href={CTA.url} class="btn-dark">Book Your Free AI Audit Call</a>
+        </div>
+      </section>
+
+      <!-- ========== DASHBOARD SHOWCASE ========== -->
+      <section class="dashboard-showcase">
+        <div class="dashboard-bg">
+          <img src="/images/hero-gradient.png" alt="" class="gradient-bg" loading="eager" data-no-dim />
+        </div>
+        <div class="dashboard-content">
+          <div class="dashboard-tabs">
+            <span class="tab">Real-Time AI Calls</span>
+            <span class="tab">AI Calls & Follow Ups</span>
+            <span class="tab tab-active">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              AI Sales & Customer Service
+            </span>
           </div>
-          <div class="hero-stats">
-            <div class="stat">
-              <span class="stat-num">24/7</span>
-              <span class="stat-label">Availability</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num">$0.04</span>
-              <span class="stat-label">/min AI cost</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num">40%</span>
-              <span class="stat-label">More conversions</span>
-            </div>
+          <div class="dashboard-image">
+            <img src="/images/dashboard-analytics.png" alt="OriginX AI Dashboard showing annual profit, traffic, and sales pipeline analytics" loading="eager" data-no-dim />
           </div>
         </div>
       </section>
 
-      <!-- Partners -->
+      <!-- ========== PARTNERS ========== -->
       <section class="partners">
-        <p class="partners-label">Trusted Technology Partners</p>
+        <p class="partners-label">Built with world-class AI infrastructure</p>
         <div class="partners-logos">
-          {partners.map((name) => (
-            <span class="partner-name">{name}</span>
-          ))}
+          <div class="partner-logo" title="OpenAI">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg>
+          </div>
+          <div class="partner-logo" title="Anthropic">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M17.304 3.541h-3.607l6.696 16.918h3.607zm-10.608 0L0 20.459h3.607l1.381-3.493h7.248l1.381 3.493h3.607zm.653 10.548l2.264-5.728 2.264 5.728z"/></svg>
+          </div>
+          <div class="partner-logo" title="Retell AI">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          </div>
+          <div class="partner-logo" title="Google AI">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053z"/></svg>
+          </div>
+          <div class="partner-logo" title="n8n">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12.66 8.12c-.96-.6-2.2-.32-2.82.64L7.4 12.82c-.6.96-.32 2.2.64 2.82.32.2.68.3 1.06.3.68 0 1.34-.34 1.72-.96l2.44-4.06c.6-.96.32-2.2-.6-2.8zm-7.4 4.7c-.96-.6-2.2-.32-2.82.64-.6.96-.32 2.2.64 2.82.32.2.68.3 1.06.3.68 0 1.34-.34 1.72-.96.6-.96.32-2.2-.6-2.8zm16.3-1.64c-.6-.96-1.86-1.24-2.82-.64-.96.6-1.24 1.86-.64 2.82.38.62 1.04.96 1.72.96.38 0 .74-.1 1.06-.3.98-.62 1.28-1.88.68-2.84z"/></svg>
+          </div>
+          <div class="partner-logo" title="Make">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M4.5 3l3 9L4.5 21h3l3-9-3-9zm9 0l3 9-3 9h3l3-9-3-9z"/></svg>
+          </div>
+          <div class="partner-logo" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </div>
         </div>
       </section>
 
-      <!-- Services -->
-      <section class="services" id="services">
-        <div class="section-header">
-          <h2>AI Services That Deliver Results</h2>
-          <p>Enterprise-grade AI voice agents and automation — built for your specific business needs.</p>
-        </div>
-        <div class="services-grid">
-          {services.map((svc) => (
-            <div class="service-card">
-              <div class="service-icon">
-                {svc.icon === 'phone-incoming' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 2 16 8 22 8"/><line x1="23" y1="1" x2="16" y2="8"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                )}
-                {svc.icon === 'phone-outgoing' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 7 23 1 17 1"/><line x1="16" y1="8" x2="23" y2="1"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                )}
-                {svc.icon === 'database' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-                )}
-                {svc.icon === 'clock' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                )}
+      <!-- ========== SERVICES ========== -->
+      <section class="services" id="features">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-badge">AI Services</span>
+            <h2>AI-Powered Solutions for Every Business Need</h2>
+            <p>Enterprise-grade AI voice agents and automation — built for your specific business needs.</p>
+          </div>
+          <div class="services-grid">
+            <!-- Inbound AI Receptionist -->
+            <div class="service-card service-card-warm">
+              <div class="service-card-content">
+                <h3>Inbound AI Receptionist</h3>
+                <p>Never miss a call again. AI answers instantly 24/7, qualifies leads, books appointments, and sends you real-time summaries.</p>
+                <ul class="service-features">
+                  <li>24/7 instant call answering</li>
+                  <li>Lead qualification & scoring</li>
+                  <li>Appointment booking</li>
+                  <li>Real-time CRM sync</li>
+                </ul>
+                <a href={CTA.url} class="btn-dark btn-sm">Get Started</a>
               </div>
-              <h3>{svc.title}</h3>
-              <p>{svc.desc}</p>
+              <div class="service-card-visual">
+                <img src="/images/chat-widget.png" alt="AI chat interface" data-no-dim />
+              </div>
             </div>
-          ))}
+
+            <!-- Outbound AI Sales -->
+            <div class="service-card service-card-coral">
+              <div class="service-card-content">
+                <h3>Outbound AI Sales</h3>
+                <p>AI makes thousands of calls for lead reactivation, appointment reminders, and follow-ups — at a fraction of the cost.</p>
+                <ul class="service-features">
+                  <li>Automated outbound campaigns</li>
+                  <li>Lead reactivation</li>
+                  <li>Follow-up sequences</li>
+                  <li>Performance analytics</li>
+                </ul>
+                <a href={CTA.url} class="btn-dark btn-sm">Get Started</a>
+              </div>
+              <div class="service-card-visual">
+                <img src="/images/robot.png" alt="AI sales agent" data-no-dim />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Process -->
+      <!-- ========== FEATURE: SMARTER CONVERSATIONS ========== -->
+      <section class="feature-section">
+        <div class="container">
+          <div class="feature-row">
+            <div class="feature-text">
+              <span class="section-badge">Intelligent AI</span>
+              <h2>Smarter Conversations, Powered by AI</h2>
+              <p>Our AI agents don't just answer calls — they understand context, remember preferences, and adapt to each conversation in real time.</p>
+              <ul class="feature-list">
+                <li>
+                  <strong>Natural Language Understanding</strong>
+                  <span>Handles complex queries, accents, and interruptions with human-like comprehension</span>
+                </li>
+                <li>
+                  <strong>Context-Aware Responses</strong>
+                  <span>Remembers conversation history and adapts responses based on caller data</span>
+                </li>
+                <li>
+                  <strong>Seamless Handoffs</strong>
+                  <span>Transfers to human agents when needed, with full context and transcripts</span>
+                </li>
+              </ul>
+            </div>
+            <div class="feature-visual">
+              <img src="/images/dashboard-chat.png" alt="AI dashboard with prompt interface, sales analyzing, and calendar integration" loading="lazy" data-no-dim />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== FEATURE: DATA-DRIVEN ========== -->
+      <section class="feature-section feature-reversed">
+        <div class="container">
+          <div class="feature-row">
+            <div class="feature-text">
+              <span class="section-badge">Analytics</span>
+              <h2>Data-Driven Performance at Scale</h2>
+              <p>Track every call, measure every outcome, and optimize your AI agents with real-time analytics dashboards.</p>
+              <ul class="feature-list">
+                <li>
+                  <strong>AI Lead Scoring</strong>
+                  <span>Automatically score and prioritize leads based on conversation signals</span>
+                </li>
+                <li>
+                  <strong>Sales Funnel Optimization</strong>
+                  <span>Visualize your pipeline from first contact to closed deal</span>
+                </li>
+                <li>
+                  <strong>Team Productivity Tracking</strong>
+                  <span>Monitor AI and human agent performance in one unified dashboard</span>
+                </li>
+              </ul>
+            </div>
+            <div class="feature-visual">
+              <img src="/images/dashboard-lead-scoring.png" alt="AI lead scoring dashboard with 72% gauge, sales funnel, and performance tracking" loading="lazy" data-no-dim />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== PROCESS ========== -->
       <section class="process">
-        <div class="section-header">
-          <h2>Our Process</h2>
-          <p>From discovery to deployment in weeks, not months.</p>
-        </div>
-        <div class="process-grid">
-          {process_steps.map((step) => (
+        <div class="container">
+          <div class="section-header">
+            <span class="section-badge">How It Works</span>
+            <h2>From Discovery to Deployment</h2>
+            <p>We handle everything — you just show up to a call.</p>
+          </div>
+          <div class="process-grid">
             <div class="process-step">
-              <span class="step-num">{step.num}</span>
-              <h3>{step.title}</h3>
-              <p>{step.desc}</p>
+              <div class="step-num">01</div>
+              <h3>Discovery Call</h3>
+              <p>We learn your business, call flows, and goals.</p>
             </div>
-          ))}
+            <div class="process-step">
+              <div class="step-num">02</div>
+              <h3>Custom AI Build</h3>
+              <p>We design and train voice agents tailored to your exact needs.</p>
+            </div>
+            <div class="process-step">
+              <div class="step-num">03</div>
+              <h3>Integration</h3>
+              <p>Connect to your CRM, calendar, and phone system — seamlessly.</p>
+            </div>
+            <div class="process-step">
+              <div class="step-num">04</div>
+              <h3>Launch & Optimize</h3>
+              <p>Go live, monitor performance, and continuously improve.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Recent posts -->
+      <!-- ========== RECENT BLOG POSTS ========== -->
       {recentPosts.length > 0 && (
         <section class="recent-posts">
-          <div class="section-header">
-            <h2>Latest from the Blog</h2>
-            <p>In-depth guides with real data, not marketing fluff.</p>
-          </div>
-          <div class="posts-row">
-            {recentPosts.map((post) => (
-              <a href={`/blog/${post.id}/`} class="post-preview">
-                <span class="post-category">{post.data.categories?.[0]}</span>
-                <h3>{post.data.title}</h3>
-                <p>{post.data.description}</p>
-              </a>
-            ))}
-          </div>
-          <div class="posts-more">
-            <a href="/blog" class="btn-secondary">View All Posts</a>
+          <div class="container">
+            <div class="section-header">
+              <span class="section-badge">Blog</span>
+              <h2>Latest from the Blog</h2>
+              <p>In-depth guides with real data, not marketing fluff.</p>
+            </div>
+            <div class="posts-grid">
+              {recentPosts.map((post) => (
+                <a href={`/blog/${post.id}/`} class="post-card">
+                  <span class="post-category">{post.data.categories?.[0]}</span>
+                  <h3>{post.data.title}</h3>
+                  <p>{post.data.description}</p>
+                  <span class="post-read">Read article &rarr;</span>
+                </a>
+              ))}
+            </div>
+            <div class="posts-more">
+              <a href="/blog" class="btn-outline">View All Posts</a>
+            </div>
           </div>
         </section>
       )}
 
-      <!-- FAQ -->
+      <!-- ========== FAQ ========== -->
       <section class="faq" id="faq">
-        <div class="section-header">
-          <h2>Frequently Asked Questions</h2>
-        </div>
-        <div class="faq-list">
-          {faqs.map((faq) => (
-            <details class="faq-item">
-              <summary>{faq.q}</summary>
-              <p>{faq.a}</p>
-            </details>
-          ))}
+        <div class="container">
+          <div class="faq-card">
+            <div class="faq-header">
+              <span class="section-badge">FAQ</span>
+              <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-list">
+              {faqs.map((faq, i) => (
+                <details class="faq-item" open={i === 0}>
+                  <summary>{faq.q}</summary>
+                  <p>{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Final CTA -->
+      <!-- ========== FINAL CTA ========== -->
       <section class="final-cta">
-        <h2>Ready to Stop Missing Calls?</h2>
-        <p>Book a free discovery call and see how AI voice agents can transform your business.</p>
-        <a href={CTA.url} class="btn-primary">{CTA.text}</a>
+        <div class="cta-bg">
+          <img src="/images/hero-gradient.png" alt="" class="cta-gradient" data-no-dim />
+        </div>
+        <div class="cta-content">
+          <h2>Ready to Transform Your Business?</h2>
+          <p>Book a free AI audit call and see exactly how AI voice agents can increase your revenue and save hours every week.</p>
+          <a href={CTA.url} class="btn-dark btn-lg">Book Your Free AI Audit Call</a>
+        </div>
       </section>
     </main>
     <Footer />
@@ -229,145 +331,230 @@ const process_steps = [
 </html>
 
 <style>
-  /* Layout */
-  main {
-    max-width: 1120px;
+  /* ==================== LAYOUT ==================== */
+  .container {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
 
   .section-header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
   .section-header h2 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
   .section-header p {
     color: var(--text-secondary);
     font-size: 1.1rem;
-    max-width: 520px;
+    max-width: 540px;
     margin: 0 auto;
+    line-height: 1.6;
   }
 
-  /* Hero */
-  .hero {
-    padding: 4rem 0 3rem;
-    text-align: center;
-  }
-  .hero-inner {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-  .hero-badge {
+  .section-badge {
     display: inline-block;
     padding: 0.3rem 0.9rem;
     border-radius: 9999px;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    color: var(--accent);
-    font-size: 0.85rem;
+    background: #FFF1ED;
+    color: #E8501A;
+    font-size: 0.8rem;
     font-weight: 600;
-    margin-bottom: 1.25rem;
+    letter-spacing: 0.01em;
   }
-  .hero h1 {
-    font-size: 3rem;
-    line-height: 1.1;
-    margin: 0 0 1rem;
-  }
-  .hero-accent {
-    color: var(--accent);
-  }
-  .hero-sub {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin: 0 0 2rem;
-    max-width: 560px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
+  :global(.dark) .section-badge {
+    background: rgba(232, 80, 26, 0.15);
   }
 
-  /* Buttons */
-  .btn-primary {
+  /* ==================== BUTTONS ==================== */
+  .btn-dark {
     display: inline-flex;
     align-items: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    background: var(--cta-bg);
-    color: var(--cta-text) !important;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    border-radius: 50px;
+    background: #111;
+    color: #fff !important;
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
-    transition: background-color 150ms ease, transform 150ms ease;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    border: none;
+    cursor: pointer;
   }
-  .btn-primary:visited { color: var(--cta-text) !important; }
-  .btn-primary:hover {
-    background: var(--cta-hover);
-    transform: translateY(-1px);
+  .btn-dark:visited { color: #fff !important; }
+  .btn-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   }
-  .btn-secondary {
+  .btn-dark.btn-sm {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .btn-dark.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.05rem;
+  }
+
+  .btn-outline {
     display: inline-flex;
     align-items: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
+    padding: 0.75rem 1.75rem;
+    border-radius: 50px;
+    border: 2px solid var(--border);
     background: transparent;
     color: var(--text-primary) !important;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
     transition: border-color 150ms ease, background-color 150ms ease;
   }
-  .btn-secondary:visited { color: var(--text-primary) !important; }
-  .btn-secondary:hover {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  .btn-outline:visited { color: var(--text-primary) !important; }
+  .btn-outline:hover {
+    border-color: #E8501A;
+    background: rgba(232, 80, 26, 0.04);
   }
 
-  /* Stats */
-  .hero-stats {
+  /* ==================== HERO ==================== */
+  .hero {
+    padding: 5rem 1.5rem 3rem;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero-heading {
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.5rem;
+  }
+  .hero-line-gray {
+    display: block;
+    color: #C4C4C4;
+  }
+  .hero-line-black {
+    display: block;
+    color: var(--text-primary);
+  }
+  :global(.dark) .hero-line-gray {
+    color: #555;
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 560px;
+    margin: 0 auto 2rem;
+  }
+
+  /* ==================== DASHBOARD SHOWCASE ==================== */
+  .dashboard-showcase {
+    position: relative;
+    padding: 0 1.5rem 4rem;
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+  .dashboard-bg {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    max-width: 1400px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .gradient-bg {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    filter: none;
+  }
+  :global(.dark) .gradient-bg {
+    opacity: 0.4;
+  }
+  .dashboard-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .dashboard-tabs {
     display: flex;
     justify-content: center;
-    gap: 3rem;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
   }
-  .stat {
-    display: flex;
-    flex-direction: column;
+  .tab {
+    display: inline-flex;
     align-items: center;
-  }
-  .stat-num {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--accent);
-  }
-  .stat-label {
+    gap: 0.35rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
     font-size: 0.85rem;
-    color: var(--text-secondary);
-    margin-top: 0.15rem;
+    font-weight: 500;
+    color: #666;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .tab-active {
+    background: #fff;
+    color: #111;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .tab-active svg {
+    color: #E8501A;
+  }
+  :global(.dark) .tab {
+    background: rgba(30,41,59,0.7);
+    color: #94A3B8;
+    border-color: rgba(255,255,255,0.06);
+  }
+  :global(.dark) .tab-active {
+    background: #1E293B;
+    color: #E2E8F0;
+  }
+  .dashboard-image {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  :global(.dark) .dashboard-image {
+    background: #1E293B;
+    border-color: rgba(255,255,255,0.06);
+  }
+  .dashboard-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
   }
 
-  /* Partners */
+  /* ==================== PARTNERS ==================== */
   .partners {
-    padding: 2rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    padding: 3rem 1.5rem;
     text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
   }
   .partners-label {
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--text-secondary);
-    margin: 0 0 1rem;
+    margin: 0 0 1.5rem;
   }
   .partners-logos {
     display: flex;
@@ -376,20 +563,25 @@ const process_steps = [
     gap: 2.5rem;
     flex-wrap: wrap;
   }
-  .partner-name {
-    font-size: 1rem;
-    font-weight: 700;
+  .partner-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-secondary);
-    opacity: 0.7;
-    transition: opacity 150ms ease;
+    opacity: 0.5;
+    transition: opacity 200ms ease;
   }
-  .partner-name:hover {
-    opacity: 1;
+  .partner-logo:hover {
+    opacity: 0.85;
+  }
+  .partner-logo svg {
+    width: 28px;
+    height: 28px;
   }
 
-  /* Services */
+  /* ==================== SERVICES ==================== */
   .services {
-    padding: 4rem 0;
+    padding: 5rem 0;
   }
   .services-grid {
     display: grid;
@@ -397,41 +589,157 @@ const process_steps = [
     gap: 1.5rem;
   }
   .service-card {
-    padding: 1.75rem;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--surface);
-    transition: box-shadow 200ms ease, transform 200ms ease;
+    border-radius: 20px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    overflow: hidden;
+    position: relative;
+    min-height: 420px;
   }
-  .service-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
+  .service-card-warm {
+    background: linear-gradient(135deg, #FFF5F0 0%, #FFE8DB 50%, #FFDBC8 100%);
+    border: 1px solid rgba(232, 80, 26, 0.08);
   }
-  .service-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    color: var(--accent);
-    margin-bottom: 1rem;
+  :global(.dark) .service-card-warm {
+    background: linear-gradient(135deg, rgba(232, 80, 26, 0.12) 0%, rgba(232, 80, 26, 0.06) 100%);
+    border-color: rgba(232, 80, 26, 0.15);
   }
-  .service-card h3 {
-    font-size: 1.15rem;
-    margin: 0 0 0.5rem;
+  .service-card-coral {
+    background: linear-gradient(135deg, #FFF0ED 0%, #FFE0D6 50%, #FFD1C2 100%);
+    border: 1px solid rgba(232, 80, 26, 0.08);
   }
-  .service-card p {
+  :global(.dark) .service-card-coral {
+    background: linear-gradient(135deg, rgba(232, 80, 26, 0.1) 0%, rgba(200, 60, 20, 0.06) 100%);
+    border-color: rgba(232, 80, 26, 0.15);
+  }
+  .service-card-content {
+    position: relative;
+    z-index: 1;
+  }
+  .service-card-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .service-card-content p {
     color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 0 1.25rem;
     font-size: 0.95rem;
+  }
+  .service-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+  }
+  .service-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     margin: 0;
-    line-height: 1.5;
+  }
+  .service-features li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #E8501A;
+    flex-shrink: 0;
+  }
+  .service-card-visual {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+  }
+  .service-card-visual img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 12px;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.1));
   }
 
-  /* Process */
+  /* ==================== FEATURE SECTIONS ==================== */
+  .feature-section {
+    padding: 5rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .feature-reversed .feature-row {
+    direction: rtl;
+  }
+  .feature-reversed .feature-row > * {
+    direction: ltr;
+  }
+  .feature-text h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .feature-text > p {
+    color: var(--text-secondary);
+    line-height: 1.65;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .feature-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+  .feature-list li strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .feature-list li span {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .feature-visual {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  :global(.dark) .feature-visual {
+    background: #1E293B;
+    border-color: rgba(255,255,255,0.06);
+  }
+  .feature-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+
+  /* ==================== PROCESS ==================== */
   .process {
-    padding: 4rem 0;
+    padding: 5rem 0;
     border-top: 1px solid var(--border);
   }
   .process-grid {
@@ -441,7 +749,15 @@ const process_steps = [
   }
   .process-step {
     text-align: center;
-    padding: 1.5rem 1rem;
+    padding: 2rem 1.25rem;
+    border-radius: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+  .process-step:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
   }
   .step-num {
     display: inline-flex;
@@ -450,15 +766,16 @@ const process_steps = [
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: var(--accent);
+    background: linear-gradient(135deg, #E8501A, #FF7A45);
     color: #fff;
     font-weight: 800;
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
   }
   .process-step h3 {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     margin: 0 0 0.5rem;
+    font-weight: 600;
   }
   .process-step p {
     color: var(--text-secondary);
@@ -467,43 +784,46 @@ const process_steps = [
     line-height: 1.5;
   }
 
-  /* Recent posts */
+  /* ==================== RECENT POSTS ==================== */
   .recent-posts {
-    padding: 4rem 0;
+    padding: 5rem 0;
     border-top: 1px solid var(--border);
   }
-  .posts-row {
+  .posts-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
-  .post-preview {
-    display: block;
-    padding: 1.5rem;
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 16px;
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 200ms ease, transform 200ms ease;
+    background: var(--surface);
+    transition: transform 200ms ease, box-shadow 200ms ease;
   }
-  .post-preview:visited { color: inherit; }
-  .post-preview:hover {
+  .post-card:visited { color: inherit; }
+  .post-card:hover {
+    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
   }
   .post-category {
     font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--accent);
+    letter-spacing: 0.05em;
+    color: #E8501A;
   }
-  .post-preview h3 {
+  .post-card h3 {
     font-size: 1.05rem;
-    line-height: 1.3;
-    margin: 0.5rem 0;
+    line-height: 1.35;
+    margin: 0.5rem 0 0.5rem;
+    font-weight: 600;
   }
-  .post-preview p {
+  .post-card p {
     color: var(--text-secondary);
     font-size: 0.9rem;
     margin: 0;
@@ -512,101 +832,219 @@ const process_steps = [
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    flex: 1;
+  }
+  .post-read {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #E8501A;
   }
   .posts-more {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
   }
 
-  /* FAQ */
+  /* ==================== FAQ ==================== */
   .faq {
-    padding: 4rem 0;
-    border-top: 1px solid var(--border);
+    padding: 5rem 0;
+  }
+  .faq-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem;
+  }
+  .faq-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .faq-header h2 {
+    margin-top: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
   }
   .faq-list {
-    max-width: 720px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
   .faq-item {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-bottom: 0.75rem;
-    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-item:last-child {
+    border-bottom: none;
   }
   .faq-item summary {
-    padding: 1rem 1.25rem;
+    padding: 1.1rem 0;
     font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
     list-style: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: background-color 150ms ease;
+    gap: 1rem;
+    transition: color 150ms ease;
+    color: var(--text-primary);
   }
   .faq-item summary::-webkit-details-marker { display: none; }
   .faq-item summary::after {
     content: '+';
-    font-size: 1.25rem;
-    font-weight: 400;
+    font-size: 1.3rem;
+    font-weight: 300;
     color: var(--text-secondary);
     flex-shrink: 0;
-    margin-left: 1rem;
+    transition: transform 200ms ease;
   }
   .faq-item[open] summary::after {
     content: '\2212';
   }
   .faq-item summary:hover {
-    background: var(--code-bg);
+    color: #E8501A;
   }
   .faq-item p {
-    padding: 0 1.25rem 1rem;
+    padding: 0 0 1.1rem;
     margin: 0;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.65;
+    font-size: 0.9rem;
   }
 
-  /* Final CTA */
+  /* ==================== FINAL CTA ==================== */
   .final-cta {
-    padding: 4rem 2rem;
+    position: relative;
+    margin: 2rem 1.5rem 3rem;
+    border-radius: 24px;
+    overflow: hidden;
     text-align: center;
-    background: var(--accent);
-    border-radius: 16px;
-    margin: 2rem 0 3rem;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .final-cta h2 {
-    color: #fff;
-    font-size: 2rem;
-    margin: 0 0 0.75rem;
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
   }
-  .final-cta p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
-    margin: 0 0 1.5rem;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
+  .cta-gradient {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    filter: none;
   }
-  .final-cta .btn-primary {
-    background: #fff;
-    color: var(--accent) !important;
+  :global(.dark) .cta-gradient {
+    opacity: 0.5;
+  }
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    padding: 4rem 2rem;
+    max-width: 600px;
+  }
+  .cta-content h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+    color: #111;
+  }
+  :global(.dark) .cta-content h2 {
+    color: #E2E8F0;
+  }
+  .cta-content p {
+    color: #444;
     font-size: 1.05rem;
-    padding: 0.85rem 2rem;
+    line-height: 1.6;
+    margin: 0 0 2rem;
   }
-  .final-cta .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+  :global(.dark) .cta-content p {
+    color: #94A3B8;
   }
 
-  /* Responsive */
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 1024px) {
+    .feature-row {
+      gap: 2.5rem;
+    }
+  }
+
   @media (max-width: 768px) {
-    .hero { padding: 2.5rem 0 2rem; }
-    .hero h1 { font-size: 2rem; }
-    .hero-stats { gap: 1.5rem; }
-    .stat-num { font-size: 1.35rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .process-grid { grid-template-columns: repeat(2, 1fr); }
-    .posts-row { grid-template-columns: 1fr; }
-    .final-cta { padding: 3rem 1.5rem; }
-    .final-cta h2 { font-size: 1.5rem; }
+    .hero {
+      padding: 3rem 1.5rem 2rem;
+    }
+    .hero-heading {
+      font-size: 2.25rem;
+    }
+    .section-header h2 {
+      font-size: 1.75rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    .service-card {
+      min-height: auto;
+    }
+
+    .feature-row {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .feature-reversed .feature-row {
+      direction: ltr;
+    }
+    .feature-text h2 {
+      font-size: 1.6rem;
+    }
+
+    .process-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-card {
+      padding: 2rem 1.5rem;
+    }
+
+    .final-cta {
+      margin: 2rem 1rem 2rem;
+      min-height: 300px;
+    }
+    .cta-content h2 {
+      font-size: 1.75rem;
+    }
+    .cta-content {
+      padding: 3rem 1.5rem;
+    }
+
+    .dashboard-tabs {
+      gap: 0.35rem;
+    }
+    .tab {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-heading {
+      font-size: 1.85rem;
+    }
+    .process-grid {
+      grid-template-columns: 1fr;
+    }
+    .partners-logos {
+      gap: 1.5rem;
+    }
   }
 </style>
