@@ -11,15 +11,15 @@ const isActive = (href: string) => {
 <header id="site-header">
   <div class="header-inner">
     <a href="/" class="logo">
-      <span class="logo-mark">OX</span>
-      <span class="logo-text">{SITE_TITLE}</span>
+      <img src="/images/ox-logo-dark.png" alt="OriginX AI" class="logo-img logo-img-light" />
+      <img src="/images/ox-logo-light.png" alt="OriginX AI" class="logo-img logo-img-dark" />
     </a>
 
     <nav class="nav-desktop">
       <a href="/#features" class:list={[{ active: isActive('/') && pathname === '/' }]}>Features</a>
       <a href="/#faq">FAQs</a>
+      <a href="/#reviews">Reviews</a>
       <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blogs</a>
-      <a href="/about" class:list={[{ active: isActive('/about') }]}>About</a>
     </nav>
 
     <div class="header-actions">
@@ -28,7 +28,7 @@ const isActive = (href: string) => {
         <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
 
-      <a href={CTA.url} class="header-cta">{CTA.text}</a>
+      <a href={CTA.url} class="header-cta">Demo NexGen AI Employee</a>
 
       <button id="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
         <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -40,9 +40,9 @@ const isActive = (href: string) => {
   <nav id="mobile-menu" class="nav-mobile" aria-hidden="true">
     <a href="/#features">Features</a>
     <a href="/#faq">FAQs</a>
+    <a href="/#reviews">Reviews</a>
     <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blogs</a>
-    <a href="/about" class:list={[{ active: isActive('/about') }]}>About</a>
-    <a href={CTA.url} class="mobile-cta">{CTA.text}</a>
+    <a href={CTA.url} class="mobile-cta">Demo NexGen AI Employee</a>
   </nav>
 </header>
 
@@ -74,26 +74,16 @@ const isActive = (href: string) => {
   .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     text-decoration: none;
-    color: var(--text-primary);
-    font-weight: 700;
-    font-size: 1.1rem;
   }
-  .logo:visited { color: var(--text-primary); }
-  .logo-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: -0.5px;
+  .logo-img {
+    height: 56px;
+    width: auto;
   }
+  .logo-img-light { display: block; }
+  .logo-img-dark { display: none; }
+  :global(.dark) .logo-img-light { display: none; }
+  :global(.dark) .logo-img-dark { display: block; }
 
   /* Desktop nav */
   .nav-desktop {
@@ -155,18 +145,20 @@ const isActive = (href: string) => {
     align-items: center;
     padding: 0.5rem 1.25rem;
     border-radius: 50px;
-    background: #111;
-    color: #fff !important;
+    background: transparent;
+    color: var(--text-primary) !important;
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 600;
     white-space: nowrap;
-    transition: transform 150ms ease, box-shadow 150ms ease;
+    border: 1.5px solid var(--border);
+    transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
   }
-  .header-cta:visited { color: #fff !important; }
+  .header-cta:visited { color: var(--text-primary) !important; }
   .header-cta:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: var(--text-secondary);
+    background: rgba(0,0,0,0.02);
   }
 
   /* Mobile menu button */

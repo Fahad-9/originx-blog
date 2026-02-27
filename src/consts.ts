@@ -1,4 +1,4 @@
-export const SITE_TITLE = 'OriginX AI Blog';
+export const SITE_TITLE = 'OriginX AI';
 export const SITE_DESCRIPTION = 'AI Voice Agents & Automation for Enterprise';
 export const SITE_URL = 'https://originxai.com';
 export const AUTHOR = 'Fahad Rahman';

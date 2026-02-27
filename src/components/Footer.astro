@@ -10,8 +10,8 @@ const year = new Date().getFullYear();
       <!-- Brand -->
       <div class="footer-brand">
         <a href="/" class="footer-logo">
-          <span class="logo-mark">OX</span>
-          <span>{SITE_TITLE}</span>
+          <img src="/images/ox-logo-dark.png" alt="OriginX AI" class="footer-logo-img footer-logo-light" />
+          <img src="/images/ox-logo-light.png" alt="OriginX AI" class="footer-logo-img footer-logo-dark" />
         </a>
         <p class="footer-tagline">AI voice agents and automation for enterprises that want real results.</p>
       </div>
@@ -86,19 +86,14 @@ const year = new Date().getFullYear();
     margin-bottom: 0.75rem;
   }
   .footer-logo:visited { color: var(--text-primary); }
-  .logo-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 800;
-    font-size: 0.7rem;
-    letter-spacing: -0.5px;
+  .footer-logo-img {
+    height: 40px;
+    width: auto;
   }
+  .footer-logo-light { display: block; }
+  .footer-logo-dark { display: none; }
+  :global(.dark) .footer-logo-light { display: none; }
+  :global(.dark) .footer-logo-dark { display: block; }
   .footer-tagline {
     color: var(--text-secondary);
     font-size: 0.9rem;
