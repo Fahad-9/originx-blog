@@ -1,0 +1,23 @@
+# OriginX AI Blog
+
+## About
+OriginX AI helps enterprises deploy AI voice agents and automation systems. This blog covers AI voice agents, automation strategies, cost comparisons, and implementation guides for business decision-makers.
+
+## Author
+Fahad Rahman — Founder, OriginX AI
+LinkedIn: https://www.linkedin.com/in/fahadrahman9/
+
+## Topics
+- AI Voice Agents (cost analysis, platform comparisons, implementation)
+- AI Automation (enterprise workflows, lead automation, CRM integration)
+- Industry Playbooks (real estate, healthcare, insurance, finance)
+- AI Tools & Reviews (Retell AI, Vapi, GoHighLevel, n8n)
+- AI Strategy (ROI frameworks, build vs buy, scaling operations)
+
+## Content Format
+Long-form technical articles (2,000-4,000 words) with data tables, cost comparisons, and actionable implementation steps. Each article includes FAQ sections and answer capsules for quick reference.
+
+## Contact
+Website: https://originxai.com
+Email: Fahad@originxai.com
+Book a call: https://calendly.com/fahad-originxai/ai-agent-discovery
